@@ -6,7 +6,6 @@
 # 2. Split the sentence
 # 3. Create lists to store words and their corresponding frequencies.
 # 4. Iterate through words and update frequencies
-
 #!/usr/bin/env python3
 import re
 
@@ -45,4 +44,3 @@ for word in words:
 # Print the word frequencies
 for i in range(len(word_list)):
     print(f"{word_list[i]}: {frequency_list[i]}")
-
