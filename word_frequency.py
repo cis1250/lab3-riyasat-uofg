@@ -7,31 +7,42 @@
 # 3. Create lists to store words and their corresponding frequencies.
 # 4. Iterate through words and update frequencies
 
+#!/usr/bin/env python3
 import re
 
-#This is a function that checks if a text qualifies as a sentence. You do not need to modify this!
 def is_sentence(text):
-    # Check if the text is not empty and is a string
     if not isinstance(text, str) or not text.strip():
         return False
-
-    # Check for starting with a capital letter
     if not text[0].isupper():
         return False
-
-    # Check for ending punctuation
     if not re.search(r'[.!?]$', text):
         return False
-
-    # Check if it contains at least one word (non-whitespace characters)
     if not re.search(r'\w+', text):
         return False
-
     return True
 
+# Prompt the user for a valid sentence
 user_sentence = input("Enter a sentence: ")
-
-while (is_sentence(user_sentence) == False):
+while not is_sentence(user_sentence):
     print("This does not meet the criteria for a sentence.")
-    user_input = input("Enter a sentence: ")
-    
+    user_sentence = input("Enter a sentence: ")
+
+# Split the sentence into words (lowercase, remove punctuation)
+words = re.findall(r'\b\w+\b', user_sentence.lower())
+
+# Create lists to store unique words and their frequencies
+word_list = []
+frequency_list = []
+
+for word in words:
+    if word in word_list:
+        idx = word_list.index(word)
+        frequency_list[idx] += 1
+    else:
+        word_list.append(word)
+        frequency_list.append(1)
+
+# Print the word frequencies
+for i in range(len(word_list)):
+    print(f"{word_list[i]}: {frequency_list[i]}")
+
